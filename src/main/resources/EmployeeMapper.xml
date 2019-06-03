@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.dao.EmployeeDAO">
+    <resultMap id="EmployeeResultMap" type="Employee">
+        <id column="emp_no" property="empNo"/>
+        <result column="birth_date" property="birthDate"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="hire_date" property="hireDate"/>
+    </resultMap>
+    <select id="getAllEmployees" resultMap="EmployeeResultMap">
+        select emp_no,birth_date,first_name,last_name,gender,hire_date from employees
+    </select>
+    <select id="getEmployeeByID" resultMap="EmployeeResultMap">
+        select emp_no,birth_date,first_name,last_name,gender,hire_date from employees where emp_no = #{id}
+    </select>
+    <select id="getEmployeeByIDandLastName" resultMap="EmployeeResultMap">
+        select emp_no,birth_date,first_name,last_name,gender,hire_date FROM EMPLOYEES WHERE emp_no = #{empNo} and last_name = #{empLastName}
+    </select>
+</mapper>
