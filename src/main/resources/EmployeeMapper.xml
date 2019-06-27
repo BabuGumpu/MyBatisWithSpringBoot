@@ -17,6 +17,11 @@
         select emp_no,birth_date,first_name,last_name,gender,hire_date from employees where emp_no = #{id}
     </select>
     <select id="getEmployeeByIDandLastName" resultMap="EmployeeResultMap">
-        select emp_no,birth_date,first_name,last_name,gender,hire_date FROM EMPLOYEES WHERE emp_no = #{empNo} and last_name = #{empLastName}
+        select emp_no,birth_date,first_name,last_name,gender,hire_date FROM EMPLOYEES WHERE emp_no = #{empNo} and
+        last_name = #{empLastName}
     </select>
+    <insert id="addEmp">
+        INSERT INTO employees (emp_no,birth_date,first_name,last_name,gender,hire_date)
+        VALUES (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender},#{hireDate});
+    </insert>
 </mapper>

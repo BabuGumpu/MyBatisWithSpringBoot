@@ -9,6 +9,7 @@ import com.bank.model.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -20,4 +21,5 @@ public interface EmployeeDAO {
 
     List<Employee> getEmployeeByIDandLastName(@Param("empNo") String empNo, @Param("empLastName") String empLastName);
 
+    int addEmployee(@Param("empNo") Long empNo, @Param("birthDate") Date birthDate, @Param("firstName") String firstName, @Param("lastName") String lastName, @Param("gender") String gender, @Param("hireDate") Date hireDate);
 }

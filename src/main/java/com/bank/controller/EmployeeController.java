@@ -10,6 +10,8 @@ import com.bank.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -46,12 +48,21 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(path = "/getEmpByIDandName")
+    @GetMapping(path = "/getEmpByIDandName")
     @ResponseBody
-    public Iterable<Employee> getEmployeeByIDandLastName(@RequestParam(value = "empNo",required = true) String empNo, @RequestParam(value = "empLastName",required = true) String empLastName) {
+    public Iterable<Employee> getEmployeeByIDandLastName(@RequestParam(value = "empNo", required = true) String empNo, @RequestParam(value = "empLastName", required = true) String empLastName) {
         //http://localhost:8080/api/getEmpByIDandName?empNo=18106&lastName=Axelband
         logger.info("::getEmployeeByIDandLastName empNo -->{}   empLastName -->{}", empNo, empLastName);
         return employeeService.getEmployeeByIDandLastName(empNo, empLastName);
+
+    }
+
+    //Insert an employee
+    @PostMapping(path = "/add")
+    @ResponseBody
+    public ResponseEntity<HttpStatus> addEmployee(@RequestBody Employee employee) {
+        employeeService.addEmpRecord(employee.getEmpNo(), employee.getBirthDate(), employee.getFirstName(), employee.getLastName(), employee.getGender(), employee.getHireDate());
+        return ResponseEntity.ok(HttpStatus.OK);
 
     }
 }
